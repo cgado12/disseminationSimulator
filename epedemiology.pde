@@ -16,12 +16,18 @@ import processing.data.JSONArray;
 
 void setup(){
   background(255);
-  initVizClass();
-  size(1240, 735);
+  size(640, 480);
   stroke(0, 0, 0);
   strokeWeight(2);
+  noLoop();
 }
 
 void draw(){
+  Graph graph = new Graph(10);
+  graph.buildErdosReyni(0.4);
+  //graph.printGraph();
+
+  drawGraph dg = new drawGraph(graph);
+
 
 }
