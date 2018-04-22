@@ -7,6 +7,7 @@ The network is build from the concept of generating a Random graph,
 in this case I am implementing an Erdos Renyi generator.
 
   -`https://en.wikipedia.org/wiki/Erdős–Rényi_model`
+  -SIR Model: `https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology`
 
 The produced graph simulates a social network.
 
