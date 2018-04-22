@@ -12,11 +12,11 @@ import java.util.*;
 
 // This class represents a directed graph using adjacency list
 // representation
-public class Graph
-{
+public class Graph {
   int numOfNodes;   // No. of vertices
   // Array of lists for Adjacency List Representation
   LinkedList<Integer> adjList[];
+  Map<Integer, String> nodeStage;
 
   // Constructor
   Graph(int v) {
@@ -24,14 +24,20 @@ public class Graph
       adjList = new LinkedList[v];
       for (int i=0; i<v; ++i)
           adjList[i] = new LinkedList();
+
+      nodeStage = new HashMap<Integer,String>();
+      for (Integer i = 0; i< v; i++){
+        nodeStage.put(Integer.valueOf(i),"S");
+      }
   }
 
+
   //Function to add an edge into the graph
-  void addEdge(int v, int w){
+  void addEdge(int v, int w) {
       adjList[v].add(w);  // Add w to v's list.
   }
 
-  void buildErdosReyni(float prob){
+  void buildErdosReyni(float prob) {
     Random rand = new Random();
     for( int i = 0; i < numOfNodes;i++ ){
       for( int j = 0; j < numOfNodes; j++ ){
@@ -43,21 +49,33 @@ public class Graph
     }
   }
 
-  void printGraph()
-    {
-        for(int v = 0; v < numOfNodes; v++)
-        {
-            System.out.println("Adjacency list of vertex "+ v);
-            System.out.print("head");
-            for(Integer pCrawl: adjList[v]){
-                System.out.print(" -> "+pCrawl);
-            }
-            System.out.println("\n");
-        }
+  void printGraph() {
+    for(int v = 0; v < numOfNodes; v++) {
+      System.out.println("Adjacency list of vertex "+ v);
+      System.out.print("head");
+      for(Integer pCrawl: adjList[v]){
+        System.out.print(" -> "+pCrawl);
+      }
+      System.out.println("\n");
     }
+  }
 
-}
-
+  /*
+    t: total length of the "infection" spreading
+    t1: length of time a node is to be infecitous
+    p: probability of a node to infect its neighbor
+    s: the number of seeds to generate to be infected on init
+  */
+  void init_Contagion(int t, int t1, float p, int s){
+    /*
+      1st: generate the seeds with random
+      outer loop for total length of infection spread
+      iterate noteStage for I and then check neighbors in adjlist
+      check neighbors for length of node being infectious
+      if probability is met -> infect the node (may need helper function)
+    */
+    print("hello");
+  }
 
 //     void DFSUtil(int v,boolean visited[])
 //     {
@@ -85,3 +103,5 @@ public class Graph
 //         // Call the recursive helper function to print DFS traversal
 //         DFSUtil(v, visited);
 //     }
+
+}
