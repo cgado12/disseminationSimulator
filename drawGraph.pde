@@ -4,9 +4,8 @@
 */
 
 
-public class drawGraph {
-
-  drawGraph(Graph g){
-
+public class spaceSettings {
+  spaceSettings(){
+    println("hello")
   }
 }
