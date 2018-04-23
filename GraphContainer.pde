@@ -67,11 +67,7 @@ public class Graph {
     s: the number of seeds to generate to be infected on init
   */
   void init_Contagion(int t, int t1, float p, int s){
-    /*
-      iterate noteStage for I and then check neighbors in adjlist
-      check neighbors for length of node being infectious
-      if probability is met -> infect the node (may need helper function)
-    */
+
     ArrayList<int> seeds = new ArrayList<int>();
     for(int i =0;i<s;i++){
       int s1 = rand.nextInteger(numOfNodes);
@@ -79,11 +75,12 @@ public class Graph {
     }
 
     while(t > 0){
-      //iterate to find infected nodes can either start w ll or map
+      /*
+        iterate noteStage for I and then check neighbors in adjlist
+        check neighbors for length of node being infectious
+        if probability is met -> infect the node (may need helper function)
+      */
     }
-
-
-
   }
 
 //     void DFSUtil(int v,boolean visited[])
