@@ -18,11 +18,8 @@ import processing.data.JSONArray;
 
 
 void setup(){
-  background(255);
   size(640, 480);
-  stroke(0, 0, 0);
-  strokeWeight(2);
-  noLoop();
+  settings s = new settings();
 }
 
 void draw(){
