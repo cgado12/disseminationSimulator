@@ -66,15 +66,10 @@ public class Graph {
     p: probability of a node to infect its neighbor
     s: the number of seeds to generate to be infected on init
   */
-  void init_Contagion(int t, int t1, float p, int s){
+  void init_Contagion( int t, int t1, float p, int s ){
 
     // turn this into a function
-    ArrayList<int> seeds = new ArrayList<int>();
-    for(int i =0;i<s;i++){
-      int s1 = rand.nextInteger(numOfNodes);
-      seeds.add(s1);
-      //nodeStage.put(Integer.valueOf(i),"I");
-    }
+    ArrayList<Integer> seeds = generateSeeds(s);
 
     while(t > 0){
       /*
@@ -88,5 +83,17 @@ public class Graph {
         if probability is met -> infect the node (may need helper function)
       */
     }
+  }
+
+  ArrayList<Integer> generateSeeds( int s ){
+    ArrayList<Integer> seeds = new ArrayList<Integer>();
+    Random rand = new Random();
+
+    for(int i =0;i<s;i++){
+      int s1 = rand.nextInt(numOfNodes);
+      seeds.add(s1);
+      nodeStage.put(Integer.valueOf(i),"I");
+    }
+    return seeds;
   }
 }
