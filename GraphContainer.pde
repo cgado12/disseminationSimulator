@@ -70,8 +70,25 @@ public class Graph {
 
     // turn this into a function
     ArrayList<Integer> seeds = generateSeeds(s);
-
+    int findI = 0
+    int i =0;
+    int current = 9999
     while(t > 0){
+      while(findI != 1){
+        // TODO: MAKE A VISITED ARRAY
+          if (nodeStage[i] == 'I'){
+            current = i;
+            findI = 1;
+          }
+          i++;
+      }
+      // infect neighbors -> get to current in adjlist first
+      for(Integer node: adjList[v]){
+        if(getProbability(p)){
+          nodeStage[node] = 'I';
+        }
+      }
+
       /*
         int numOfNodes;   // No. of vertices
         // Array of lists for Adjacency List Representation
@@ -82,6 +99,9 @@ public class Graph {
         check neighbors for length of node being infectious
         if probability is met -> infect the node (may need helper function)
       */
+      t++;
+      i = 0;
+      findI = 0;
     }
   }
 
@@ -96,4 +116,11 @@ public class Graph {
     }
     return seeds;
   }
+
+  Float getProbability(Float p){
+    Random rand = new Random();
+    return  (rand.nextDouble <= p);
+  }
+
+
 }
