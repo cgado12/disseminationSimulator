@@ -1,7 +1,16 @@
 /*
   class to take care of drawing and
   setting the position of the graph
+
+  imports are here as well
 */
+
+
+import java.io.*;
+import java.util.*;
+import java.lang.Math.*;
+import processing.data.JSONObject;
+import processing.data.JSONArray;
 
 
 public class settings {
@@ -12,24 +21,24 @@ public class settings {
     strokeWeight(2);
     noLoop();
   }
-  
-  setBackground(int i){
+
+  void setBackground(int i){
     background(i);
   }
 
-  setStrokeWeight(int i){
+  void setStrokeWeight(int i){
     strokeWeight(i);
   }
 
-  setfill(int i){
-    fill(i)
+  void setfill(int i){
+    fill(i);
   }
 
-  setStroke(int i, int j, int k){
+  void setStroke(int i, int j, int k){
     stroke(i,j,k);
   }
 
-  setStroke(int i){
+  void setStroke(int i){
     stroke(i);
   }
 }
