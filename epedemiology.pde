@@ -6,20 +6,12 @@ SIR model -> various fucntions
 
 NOTE: decide where to draw stuff
 could call draw from init_Contagion
-
 */
-
-import java.io.*;
-import java.util.*;
-import java.lang.Math.*;
-import processing.data.JSONObject;
-import processing.data.JSONArray;
-
-
 
 void setup(){
   size(640, 480);
   settings s = new settings();
+
 }
 
 void draw(){
