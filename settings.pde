@@ -12,4 +12,24 @@ public class settings {
     strokeWeight(2);
     noLoop();
   }
+  
+  setBackground(int i){
+    background(i);
+  }
+
+  setStrokeWeight(int i){
+    strokeWeight(i);
+  }
+
+  setfill(int i){
+    fill(i)
+  }
+
+  setStroke(int i, int j, int k){
+    stroke(i,j,k);
+  }
+
+  setStroke(int i){
+    stroke(i);
+  }
 }
