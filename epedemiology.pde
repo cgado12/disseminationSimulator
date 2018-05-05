@@ -1,9 +1,4 @@
 /*
-replicate the info dissemination project in processing
-first code a graph generator
-graph G < [nodes N(id, stage)]
-SIR model -> various fucntions
-
 NOTE: decide where to draw stuff
 could call draw from init_Contagion
 */

@@ -81,7 +81,7 @@ public class Graph {
   void init_Contagion( int t, int t1, float p, int s ){
 
     int[] visited = initVisited();
-    ArrayList<Integer> seeds = generateSeeds(s);
+    ArrayList<Integer> seeds = generateSeeds( s );
     int findI = 0;
     int i =0;
     int current = 9999;
