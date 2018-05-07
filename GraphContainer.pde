@@ -123,6 +123,8 @@ public class Graph {
       }
 
       /*
+        TODO: utilize t1
+        
         int numOfNodes;   // No. of vertices
         // Array of lists for Adjacency List Representation
         LinkedList<Integer> adjList[];
