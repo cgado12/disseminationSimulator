@@ -10,15 +10,13 @@
 import java.io.*;
 import java.util.*;
 
-// This class represents a directed graph using adjacency list
-// representation
 public class Graph {
-  int numOfNodes;   // No. of vertices
-  // Array of lists for Adjacency List Representation
+  int numOfNodes;
+  /* Array of lists for Adjacency List Representation */
   LinkedList<Integer> adjList[];
   Map<Integer, String> nodeStage;
 
-  // Constructor
+  /* Constructor adds # of nodes specified */
   Graph(int v) {
       numOfNodes = v;
       adjList = new LinkedList[v];
@@ -31,12 +29,33 @@ public class Graph {
       }
   }
 
-
-  //Function to add an edge into the graph
-  void addEdge(int v, int w) {
-      adjList[v].add(w);  // Add w to v's list.
+  /* function to check whether a node is visited or not */
+  int isVisited(int[] visited, int i){
+    if( visited[i] == 0){
+      return 0;
+    }
+    return 1;
   }
 
+  /* initializes a new visited array */
+  //TODO: might need to init with zeros
+  int[] initVisited(){
+    int[] visited = new int[numOfNodes];
+    return visited;
+  }
+
+  /* adds edge to graph by connecting in linked list */
+  void addEdge(int source, int dest) {
+      adjList[source].add(dest);
+  }
+
+  /* returns the probability of a given event happening */
+  boolean getProbability(Float p){
+    Random rand = new Random();
+    return  (rand.nextDouble() <= p);
+  }
+
+  /* implements Erdos Reyni by way of edge adding */
   void buildErdosReyni(float prob) {
     Random rand = new Random();
     for( int i = 0; i < numOfNodes;i++ ){
@@ -49,27 +68,29 @@ public class Graph {
     }
   }
 
+ /* prints the graph to ensure functionality */
   void printGraph() {
     for(int v = 0; v < numOfNodes; v++) {
-      System.out.println("Adjacency list of vertex "+ v);
-      System.out.print("head");
+      System.out.println("current node: "+ v +  " status: " + nodeStage.get(v));
+      System.out.print("Neighbors: ");
       for(Integer node: adjList[v]){
-        System.out.print(" -> "+node);
+        System.out.print(" -> "+ node + "|" + nodeStage.get(node));
       }
       System.out.println("\n");
     }
   }
 
-  int isVisited(int[] visited, int i){
-    if( visited[i] == 0){
-      return 0;
-    }
-    return 1;
-  }
+  /* generates the seeds to which are infected in the graph */
+  ArrayList<Integer> generateSeeds( int s ){
+    ArrayList<Integer> seeds = new ArrayList<Integer>();
+    Random rand = new Random();
 
-  int[] initVisited(){
-    int[] visited = new int[numOfNodes];
-    return visited;
+    for(int i =0;i<s;i++){
+      int s1 = rand.nextInt(numOfNodes);
+      seeds.add(s1);
+      nodeStage.put(Integer.valueOf(i),"I");
+    }
+    return seeds;
   }
 
   /*
@@ -85,16 +106,16 @@ public class Graph {
     int findI = 0;
     int i =0;
     int current = 9999;
-    while(t > 0){
+    for(int days = 0; days < t; days++){
       while( findI != 1 ){
-        // TODO: MAKE A VISITED ARRAY
-          if (nodeStage.get( i ) == "I"){
+        /* find one of the infected */
+          if (nodeStage.get( i ) == "I" && isVisited( visited,i ) == 0 ){
             current = i;
             findI = 1;
           }
           i++;
       }
-      // infect neighbors -> get to current in adjlist first
+      /* infect neighbors */
       for(Integer node: adjList[ i ] ){
         if(getProbability( p ) ){
           nodeStage.put( node, "I" );
@@ -111,28 +132,10 @@ public class Graph {
         check neighbors for length of node being infectious
         if probability is met -> infect the node (may need helper function)
       */
-      t++;
+      nodeStage.put(i, "R");
+      visited[i] = 1;
       i = 0;
       findI = 0;
     }
   }
-
-  ArrayList<Integer> generateSeeds( int s ){
-    ArrayList<Integer> seeds = new ArrayList<Integer>();
-    Random rand = new Random();
-
-    for(int i =0;i<s;i++){
-      int s1 = rand.nextInt(numOfNodes);
-      seeds.add(s1);
-      nodeStage.put(Integer.valueOf(i),"I");
-    }
-    return seeds;
-  }
-
-  boolean getProbability(Float p){
-    Random rand = new Random();
-    return  (rand.nextDouble() <= p);
-  }
-
-
 }
