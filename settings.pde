@@ -18,8 +18,7 @@ public class settings {
   settings(){
     background(200);
     stroke(0, 0, 0);
-    strokeWeight(1);
-    //noLoop();
+    strokeWeight(0.5);
   }
 
   void setBackground(int i){

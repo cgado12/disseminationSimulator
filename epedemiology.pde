@@ -1,25 +1,60 @@
 /*
-NOTE: decide where to draw stuff
-could call draw from init_Contagion
+
+
+
 */
 
-/* control the animation */
-int nextTime;
-final int step = 500;
 
 void setup(){
-  // size( 640,480 );
   size( 500,500 );
   settings s = new settings();
-  graph.buildErdosReyni( graph, 0.2 );
   frameRate(1);
+  g.generateSeeds( seeds );
+  g.buildErdosReyni( g, 0.4);
 }
 
 void draw(){
-  /*
-    build graph visualization ( only points )
-  */
-  drawGraph dg = new drawGraph(graph);
+  if(keyPressed == true) {
+    /*
+      build graph visualization ( only points )
+    */
+    drawGraph dg = new drawGraph(g,ran);
 
+    /* start contagion */
+    if(days < t){
+      while( findI != 1 ){
+        /* find one of the infected */
+        if (g.nodeStage.get( i ) == "I" && g.isVisited( visited,i ) == 0 ){
+          current = i;
+          findI = 1;
+        }
+        i++;
+      }
+      /* infect neighbors */
+      for(Integer node: g.adjList[ current ] ){
+        if(g.nodeStage.get(node) == "R"){
+          continue;
+        }
+        if(g.nodeStage.get(node) == "I"){
+          continue;
+        }
+        if(g.getProbability( 0.3 ) ){
+          g.nodeStage.put( node, "I" );
+        }
+      }
 
+      g.nodeStage.put(current, "R");
+      visited[current] = 1;
+      //g.printGraph();
+
+      i = 0;
+      ran = 1;
+      findI = 0;
+      days++;
+      redraw();
+    }else {
+      noLoop();
+    }
+
+  }
 }
