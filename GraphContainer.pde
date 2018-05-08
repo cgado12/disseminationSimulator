@@ -16,7 +16,7 @@
 /* Initialize necessary components: mess of globals */
 int t = 8;
 int t1 = 0; // implement this
-float p = 0.5;
+float p = 0.3;
 int seeds = 1;
 Graph g = new Graph( 30 );
 int[] visited = g.initVisited();

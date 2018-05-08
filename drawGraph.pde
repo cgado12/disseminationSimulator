@@ -26,6 +26,7 @@ public class drawGraph extends Graph {
       }
       ellipse(x, y, 10, 10);
     }
+    
     if( ran == 0 ){
       for(int src=0; src < n; src++){
         for( int dest: g.adjList[src]){
