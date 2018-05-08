@@ -16,10 +16,10 @@ import processing.data.JSONArray;
 public class settings {
 
   settings(){
-    background(255);
+    background(200);
     stroke(0, 0, 0);
-    strokeWeight(2);
-    noLoop();
+    strokeWeight(1);
+    //noLoop();
   }
 
   void setBackground(int i){
