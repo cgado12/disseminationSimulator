@@ -1,17 +1,13 @@
 /*
   class to take care of drawing and
   setting the position of the graph
-
-  imports are here as well
 */
-
 
 import java.io.*;
 import java.util.*;
 import java.lang.Math.*;
 import processing.data.JSONObject;
 import processing.data.JSONArray;
-
 
 public class settings {
 
