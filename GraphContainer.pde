@@ -6,9 +6,7 @@
   a-random-large-social-network-graph-that-is-statistically
   -indistinguishable-from-Facebooks-social-network-graph
 */
-
-import java.io.*;
-import java.util.*;
+Graph graph = new Graph( 15 );
 
 public class Graph {
   int numOfNodes;
@@ -16,8 +14,10 @@ public class Graph {
   LinkedList<Integer> adjList[];
   Map<Integer, String> nodeStage;
 
+  Graph(){}
+
   /* Constructor adds # of nodes specified */
-  Graph(int v) {
+  Graph( int v ) {
       numOfNodes = v;
       adjList = new LinkedList[v];
       for (int i=0; i<v; ++i)
@@ -56,13 +56,20 @@ public class Graph {
   }
 
   /* implements Erdos Reyni by way of edge adding */
-  void buildErdosReyni(float prob) {
+  void buildErdosReyni( Graph g,float p ) {
+    /*
+      build graph visualization ( only points )
+    */
+    drawGraph dg = new drawGraph(g);
+
     Random rand = new Random();
     for( int i = 0; i < numOfNodes;i++ ){
       for( int j = 0; j < numOfNodes; j++ ){
-        // probability of the node connecting to another
-        if( rand.nextDouble() <= prob ){
-            addEdge(i,j);
+        /* probability of the node connecting to another */
+        if( getProbability( p ) ){
+          addEdge(i,j);
+          /* update visualization */
+          dg.drawLine(i,j);
         }
       }
     }
@@ -94,12 +101,13 @@ public class Graph {
   }
 
   /*
+    g: pass in the original object, its needed for drawGraph
     t: total length of the "infection" spreading
     t1: length of time a node is to be infecitous
     p: probability of a node to infect its neighbor
     s: the number of seeds to generate to be infected on init
   */
-  void init_Contagion( int t, int t1, float p, int s ){
+  void init_Contagion(Graph g,int t, int t1, float p, int s ){
 
     int[] visited = initVisited();
     ArrayList<Integer> seeds = generateSeeds( s );
@@ -124,7 +132,7 @@ public class Graph {
 
       /*
         TODO: utilize t1
-        
+
         int numOfNodes;   // No. of vertices
         // Array of lists for Adjacency List Representation
         LinkedList<Integer> adjList[];
