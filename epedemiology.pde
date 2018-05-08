@@ -1,9 +1,12 @@
 /*
+  visualize the SIR model
 
-
-
+  TODO:
+   - make more accurate according to SIR model
+   - use "t1" and find better way to represent graph(clustering)
+   - consider extending this project or creating one with algos
+   from ml class 
 */
-
 
 void setup(){
   size( 500,500 );
@@ -14,10 +17,9 @@ void setup(){
 }
 
 void draw(){
+  /* Hold down a key to see the enture visualization */
   if(keyPressed == true) {
-    /*
-      build graph visualization ( only points )
-    */
+    /* build graph visualization ( only points ) */
     drawGraph dg = new drawGraph(g,ran);
 
     /* start contagion */
@@ -38,7 +40,7 @@ void draw(){
         if(g.nodeStage.get(node) == "I"){
           continue;
         }
-        if(g.getProbability( 0.3 ) ){
+        if(g.getProbability( p ) ){
           g.nodeStage.put( node, "I" );
         }
       }
