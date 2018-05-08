@@ -5,8 +5,27 @@
   https://www.quora.com/Is-it-possible-to-generate-
   a-random-large-social-network-graph-that-is-statistically
   -indistinguishable-from-Facebooks-social-network-graph
+
+  - - - - - - - - - - - - - - - - - -
+  g: original graph object
+  t: total length of the "infection" spreading
+  t1: length of time a node is to be infecitous
+  p: probability of a node to infect its neighbor
+  s: the number of seeds to generate to be infected on init
 */
-Graph graph = new Graph( 15 );
+/* Initialize necessary components: mess of globals */
+int t = 8;
+int t1 = 0; // implement this
+float p = 0.5;
+int seeds = 1;
+Graph g = new Graph( 30 );
+int[] visited = g.initVisited();
+int ran = 0;
+int findI = 0;
+int i =0;
+int current = 9999;
+int days = 0;
+
 
 public class Graph {
   int numOfNodes;
@@ -38,7 +57,6 @@ public class Graph {
   }
 
   /* initializes a new visited array */
-  //TODO: might need to init with zeros
   int[] initVisited(){
     int[] visited = new int[numOfNodes];
     return visited;
@@ -57,19 +75,12 @@ public class Graph {
 
   /* implements Erdos Reyni by way of edge adding */
   void buildErdosReyni( Graph g,float p ) {
-    /*
-      build graph visualization ( only points )
-    */
-    drawGraph dg = new drawGraph(g);
-
     Random rand = new Random();
     for( int i = 0; i < numOfNodes;i++ ){
       for( int j = 0; j < numOfNodes; j++ ){
         /* probability of the node connecting to another */
         if( getProbability( p ) ){
           addEdge(i,j);
-          /* update visualization */
-          dg.drawLine(i,j);
         }
       }
     }
@@ -77,6 +88,7 @@ public class Graph {
 
  /* prints the graph to ensure functionality */
   void printGraph() {
+    println(" - - - - - - - - - - - - - - - - - - - - - - -  -");
     for(int v = 0; v < numOfNodes; v++) {
       System.out.println("current node: "+ v +  " status: " + nodeStage.get(v));
       System.out.print("Neighbors: ");
@@ -88,64 +100,13 @@ public class Graph {
   }
 
   /* generates the seeds to which are infected in the graph */
-  ArrayList<Integer> generateSeeds( int s ){
+  void generateSeeds( int s ){
     ArrayList<Integer> seeds = new ArrayList<Integer>();
     Random rand = new Random();
 
     for(int i =0;i<s;i++){
       int s1 = rand.nextInt(numOfNodes);
-      seeds.add(s1);
-      nodeStage.put(Integer.valueOf(i),"I");
-    }
-    return seeds;
-  }
-
-  /*
-    g: pass in the original object, its needed for drawGraph
-    t: total length of the "infection" spreading
-    t1: length of time a node is to be infecitous
-    p: probability of a node to infect its neighbor
-    s: the number of seeds to generate to be infected on init
-  */
-  void init_Contagion(Graph g,int t, int t1, float p, int s ){
-
-    int[] visited = initVisited();
-    ArrayList<Integer> seeds = generateSeeds( s );
-    int findI = 0;
-    int i =0;
-    int current = 9999;
-    for(int days = 0; days < t; days++){
-      while( findI != 1 ){
-        /* find one of the infected */
-          if (nodeStage.get( i ) == "I" && isVisited( visited,i ) == 0 ){
-            current = i;
-            findI = 1;
-          }
-          i++;
-      }
-      /* infect neighbors */
-      for(Integer node: adjList[ i ] ){
-        if(getProbability( p ) ){
-          nodeStage.put( node, "I" );
-        }
-      }
-
-      /*
-        TODO: utilize t1
-
-        int numOfNodes;   // No. of vertices
-        // Array of lists for Adjacency List Representation
-        LinkedList<Integer> adjList[];
-        Map<Integer, String> nodeStage;
-
-        iterate noteStage for I and then check neighbors in adjlist
-        check neighbors for length of node being infectious
-        if probability is met -> infect the node (may need helper function)
-      */
-      nodeStage.put(i, "R");
-      visited[i] = 1;
-      i = 0;
-      findI = 0;
+      nodeStage.put(Integer.valueOf(s1),"I");
     }
   }
 }
