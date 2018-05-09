@@ -1,6 +1,11 @@
 /*
   class to take care of drawing and
   setting the position of the graph
+
+  TODO: add features to make the visualization more
+    appealing. borders|legend|mouse interactions
+    prepare for more 'views' to dislay graph differently
+    or even display more than one type of graph.
 */
 
 import java.io.*;
