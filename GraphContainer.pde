@@ -88,7 +88,7 @@ public class Graph {
 
  /* prints the graph to ensure functionality */
   void printGraph() {
-    println(" - - - - - - - - - - - - - - - - - - - - - - -  -");
+    println(" - - - - - - - - - - - - - - - - - - - - - - - -");
     for(int v = 0; v < numOfNodes; v++) {
       System.out.println("current node: "+ v +  " status: " + nodeStage.get(v));
       System.out.print("Neighbors: ");
