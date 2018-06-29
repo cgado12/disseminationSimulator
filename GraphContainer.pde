@@ -70,7 +70,18 @@ public class Graph {
   /* returns the probability of a given event happening */
   boolean getProbability(Float p){
     Random rand = new Random();
-    return  (rand.nextDouble() <= p);
+    double q = rand.nextDouble();
+    if( q <= p){
+      if(q < 0.3){
+        stroke(255,255,0);
+      }else if(q < 0.6 ){
+        stroke(255,228,181);
+      } else{
+        stroke(255,127,80);
+      }
+      return true;
+    }
+    return false;
   }
 
   /* implements Erdos Reyni by way of edge adding */
